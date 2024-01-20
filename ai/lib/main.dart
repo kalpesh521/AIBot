@@ -25,9 +25,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) => ModelsProvider(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (_) => ChatProvider(),
-        // ),
+        ChangeNotifierProvider(
+          create: (_) => ChatProvider(),
+        ),
       ],
    child: MaterialApp(
       debugShowCheckedModeBanner: false,
