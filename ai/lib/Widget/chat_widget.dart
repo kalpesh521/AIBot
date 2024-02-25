@@ -1,4 +1,3 @@
-import 'package:ai/Constants/constants.dart';
 import 'package:ai/Services/assets_manager.dart';
 import 'package:ai/Widget/text_widget.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -14,7 +13,9 @@ class ChatWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Material(
-        color: chatindex == 0 ? CardColor : ScaffoldBackgroundColor,
+        color: chatindex == 0
+            ? Theme.of(context).colorScheme.secondary
+            : Theme.of(context).colorScheme.onSecondary,
         child: Row(
           // mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +36,7 @@ class ChatWidget extends StatelessWidget {
                   ? TextWidget(label: msg)
                   : DefaultTextStyle(
                       style: TextStyle(
-                        color: Colors.white,
+                        color:  Theme.of(context).colorScheme.onPrimary,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),

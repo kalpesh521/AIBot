@@ -1,14 +1,14 @@
+import 'package:ai/Constants/theme.dart';
 import 'package:ai/Provider/ChatProvider.dart';
 import 'package:ai/Provider/ModelProvider.dart';
 import 'package:ai/Screens/chat_screen.dart';
-import 'package:ai/Constants/constants.dart';
+import 'package:ai/Screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
 import 'package:provider/provider.dart';
 
 void main() {
-   
   runApp(MyApp());
 }
 
@@ -20,7 +20,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-   return  MultiProvider(
+    return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (_) => ModelsProvider(),
@@ -29,17 +29,15 @@ class _MyAppState extends State<MyApp> {
           create: (_) => ChatProvider(),
         ),
       ],
-   child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-          scaffoldBackgroundColor: ScaffoldBackgroundColor,
-          appBarTheme: AppBarTheme(
-            color: CardColor,
-          )),
-      home: ChatScreen(),
-    ),
-   );
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.light,
+        home: HomeScreen(),
+
+        // home: ChatScreen(),
+      ),
+    );
   }
 }
-

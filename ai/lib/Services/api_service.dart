@@ -20,7 +20,6 @@ class ApiService {
 
       for (var value in jsonResponse['data']) {
         temp.add(value);
-        // print("temp $value");
       }
       return Models.modelfromSnapshot(temp);
     } catch (error) {
@@ -34,7 +33,7 @@ class ApiService {
     try {
       log("modelId $modelId");
       var response = await http.post(
-        Uri.parse("$BASE_URL/completions"),
+        Uri.parse("$BASE_URL/chat/completions"),
         headers: {
           'Authorization': 'Bearer $API_KEY',
           "Content-Type": "application/json"
@@ -42,33 +41,27 @@ class ApiService {
         body: jsonEncode(
           {
             "model": modelId,
-            // "messages": [
-            //   {
-            //     "role": "user",
-            //     "content": message,
-            //   }
-            // ]
-
-            "prompt": message,
+            "messages": [
+              {
+                "role": "user",
+                "content": message,
+              },
+            ],
             "max_tokens": 100,
           },
         ),
       );
 
-      Map jsonResponse = jsonDecode(response.body);
-      // Map jsonResponse = json.decode(utf8.decode(response.bodyBytes));
+      Map jsonResponse = json.decode(utf8.decode(response.bodyBytes));
       if (jsonResponse['error'] != null) {
-        // print("jsonResponse['error'] ${jsonResponse['error']["message"]}");
         throw HttpException(jsonResponse['error']["message"]);
       }
       List<chatModel> chatList = [];
       if (jsonResponse["choices"].length > 0) {
-        // print("jsonResponse[choices]text ${jsonResponse["choices"][0]["text"]}");
-
         chatList = List.generate(
           jsonResponse["choices"].length,
           (index) => chatModel(
-            msg: jsonResponse["choices"][index]["text"],
+            msg: jsonResponse["choices"][index]["message"]["content"],
             chatIndex: 1,
           ),
         );

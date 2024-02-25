@@ -4,7 +4,7 @@ class TextWidget extends StatelessWidget {
   const TextWidget(
       {Key? key,
       required this.label,
-      this.fontSize = 16,
+      this.fontSize = 15,
       this.color,
       this.fontWeight})
       : super(key: key);
@@ -17,11 +17,10 @@ class TextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label,
-      // textAlign: TextAlign.justify,
-      style: TextStyle(
-        color: color ?? Colors.white,
+       style: TextStyle(
+        color: color ??   Theme.of(context).colorScheme.primary,
         fontSize: fontSize,
-        fontWeight: fontWeight ?? FontWeight.w500,
+        fontWeight: fontWeight ?? FontWeight.w600,
       ),
     );
   }

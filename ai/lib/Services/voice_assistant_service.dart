@@ -1,10 +1,11 @@
+
 import 'package:ai/Widget/dropdown_model.dart';
 import 'package:flutter/material.dart';
 
 import '../Widget/text_widget.dart';
 
 class Services {
-  static Future<void> showModelSheet({required BuildContext context}) async {
+  static Future<void>  voiceAssistant({required BuildContext context}) async {
     await showModalBottomSheet(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
@@ -22,10 +23,11 @@ class Services {
                   color: Colors.white,
                 )),
                 SizedBox(width: 10,),
-                Flexible(  
-                  // flex: 5,
- child: DropdownModel())
-              ],
+//                 Flexible(  
+//                   // flex: 5,
+// //  child: DropdownModel())
+//               ],
+              ]
             ),
           );
         });
