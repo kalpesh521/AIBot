@@ -238,7 +238,7 @@ class _ChatScreenState extends State<ChatScreen> {
       setListeningState(true);
       final result = await voiceHandler.startListening();
       setListeningState(false);
-      await sendTextMessage(result);
+      // await sendTextMessage(result);
     }
   }
 

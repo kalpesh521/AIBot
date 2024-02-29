@@ -5,10 +5,12 @@ import 'package:ai/Screens/chat_screen.dart';
 import 'package:ai/Screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(MyApp());
 }
 
@@ -22,9 +24,6 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => ModelsProvider(),
-        ),
         ChangeNotifierProvider(
           create: (_) => ChatProvider(),
         ),
