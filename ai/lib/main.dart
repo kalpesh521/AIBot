@@ -34,9 +34,9 @@ class _MyAppState extends State<MyApp> {
         theme: lightTheme,
         darkTheme: darkTheme,
         themeMode: ThemeMode.light,
-        home: HomeScreen(),
+        // home: HomeScreen(),
 
-        // home: ChatScreen(),
+        home: ChatScreen(),
       ),
     );
   }
