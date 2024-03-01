@@ -1,5 +1,6 @@
 import 'package:ai/Provider/ChatProvider.dart';
 import 'package:ai/Provider/ModelProvider.dart';
+import 'package:ai/Provider/voice_provider.dart';
 import 'package:ai/Services/api_service.dart';
 import 'package:ai/Services/assets_manager.dart';
 import 'package:ai/Services/voice_handler.dart';
@@ -52,7 +53,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final chatProvider = Provider.of<ChatProvider>(context);
+    final chatProvider = Provider.of<ChatProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBarWidget(
         title: 'ChatGPT',
@@ -118,7 +120,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             controller: textEditingController,
                             cursorColor: Theme.of(context).colorScheme.tertiary,
                             onSubmitted: (value) async {
-                              await sendTextMessage(chatProvider);
+                              await sendTextMessage();
                             },
                             decoration: InputDecoration(
                               hintText: "How can I help you ?",
@@ -131,13 +133,13 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       ),
                       ToggleButton(
+                        isListening: _isListening,
                         isReplying: _isReplying,
                         inputmode: _inputmode,
                         sendTextMessage: () {
-                          sendTextMessage(chatProvider);
+                          sendTextMessage();
                         },
                         sendVoiceMessage: sendVoiceMessage,
-                        isListening: _isListening,
                       ),
                     ],
                   ),
@@ -170,7 +172,9 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  Future<void> sendTextMessage(ChatProvider chatProvider) async {
+  Future<void> sendTextMessage() async {
+    final chatProvider = Provider.of<ChatProvider>(context, listen: false);
+
     setReplyingState(true);
     if (_isTyping) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -236,9 +240,10 @@ class _ChatScreenState extends State<ChatScreen> {
       setListeningState(false);
     } else {
       setListeningState(true);
-      final result = await voiceHandler.startListening();
       setListeningState(false);
-      // await sendTextMessage(result);
+      String result =
+          Provider.of<VoiceProvider>(context, listen: false).startListen;
+      await sendTextMessage();
     }
   }
 

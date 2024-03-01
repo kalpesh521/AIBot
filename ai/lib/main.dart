@@ -1,6 +1,7 @@
 import 'package:ai/Constants/theme.dart';
 import 'package:ai/Provider/ChatProvider.dart';
 import 'package:ai/Provider/ModelProvider.dart';
+import 'package:ai/Provider/voice_provider.dart';
 import 'package:ai/Screens/chat_screen.dart';
 import 'package:ai/Screens/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "assets/.env");
   runApp(MyApp());
 }
 
@@ -26,6 +27,9 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(
           create: (_) => ChatProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => VoiceProvider(),
         ),
       ],
       child: MaterialApp(
