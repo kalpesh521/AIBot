@@ -1,16 +1,34 @@
 import 'package:ai/Services/assets_manager.dart';
 import 'package:flutter/material.dart';
 
-class  AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final Color? color; // New parameter for color
+  final bool showBackButton;
 
-  const  AppBarWidget({Key? key, required this.title, this.color}) : super(key: key);
+  const AppBarWidget(
+      {Key? key, this.showBackButton = true, required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: color ?? Colors.white, // Use the provided color or default to white
+      // leading: showBackButton ? BackButton(color: Theme.of(context).colorScheme.secondary): null,
+      automaticallyImplyLeading: false,
+      leadingWidth: 100,
+      leading: showBackButton
+          ? IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          : null,
+      backgroundColor: Theme.of(context)
+          .colorScheme
+          .onSecondary, // Use the provided color or default to white
       elevation: 9,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,

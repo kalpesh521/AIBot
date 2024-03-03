@@ -43,7 +43,13 @@ dependencies:
   fluttericon: ^2.0.0
   bootstrap_icons: ^1.11.3
   flutter_dotenv: ^5.1.0
-
+  chat_gpt_sdk: ^2.2.8
+  flutter_riverpod: ^2.4.10
+  avatar_glow: ^3.0.1
+  motion_tab_bar: ^2.0.4
+  animate_do: ^3.3.4
+  flutter_tts: ^3.8.5
+  
 
 dev_dependencies:
   flutter_test:

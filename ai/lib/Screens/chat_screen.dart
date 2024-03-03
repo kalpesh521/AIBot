@@ -1,8 +1,5 @@
 import 'package:ai/Provider/ChatProvider.dart';
-import 'package:ai/Provider/ModelProvider.dart';
 import 'package:ai/Provider/voice_provider.dart';
-import 'package:ai/Services/api_service.dart';
-import 'package:ai/Services/assets_manager.dart';
 import 'package:ai/Services/voice_handler.dart';
 import 'package:ai/Widget/appbar.dart';
 import 'package:ai/Widget/chat_item.dart';
@@ -40,7 +37,11 @@ class _ChatScreenState extends State<ChatScreen> {
     textEditingController = TextEditingController();
     focusNode = FocusNode();
     _listScrollController = ScrollController();
-    voiceHandler.initSpeech();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final voiceProvider = Provider.of<VoiceProvider>(context, listen: false);
+      voiceProvider.initSpeech();
+    });
   }
 
   @override
@@ -56,10 +57,10 @@ class _ChatScreenState extends State<ChatScreen> {
     final chatProvider = Provider.of<ChatProvider>(context, listen: false);
 
     return Scaffold(
-      appBar: AppBarWidget(
+      appBar: const AppBarWidget(
+        showBackButton : true,
         title: 'ChatGPT',
-        color: Colors.blue.shade50,
-      ),
+       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 20),
@@ -231,20 +232,36 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   void sendVoiceMessage() async {
-    if (!voiceHandler.isEnabled) {
-      print('Not supported');
+    final voiceProvider = Provider.of<VoiceProvider>(context, listen: false);
+    final chatProvider = Provider.of<ChatProvider>(context, listen: false);
+
+    if (!voiceProvider.isInitialized) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: TextWidget(label: "Voice not supported or not enabled"),
+          backgroundColor: Colors.red,
+        ),
+      );
       return;
     }
-    if (voiceHandler.speechToText.isListening) {
-      await voiceHandler.stopListening();
-      setListeningState(false);
-    } else {
-      setListeningState(true);
-      setListeningState(false);
-      String result =
-          Provider.of<VoiceProvider>(context, listen: false).startListen;
-      await sendTextMessage();
-    }
+
+    setListeningState(true);
+    await voiceProvider.startListening();
+
+    voiceProvider.addListener(() async {
+      if (!voiceProvider.isListening) {
+        // textEditingController.text = voiceProvider.Words;
+        final msg = voiceProvider.Words;
+        chatProvider.addMessages(msg: msg);
+        await chatProvider.sendMessageAndGetAns(
+          msg: msg,
+          model: currentmodel,
+        );
+        textEditingController.clear();
+        setListeningState(false);
+        // Remove the listener after receiving a response
+      }
+    });
   }
 
   void setListeningState(bool isListening) {
