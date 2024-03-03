@@ -19,7 +19,7 @@ class _VoiceChatScreenState extends State<VoiceChatScreen> {
   FlutterTts fluttertts = FlutterTts();
  
   Future<void> systemSpeak(String content) async {
-    // await fluttertts.speak(content);
+    await fluttertts.speak(content);
   }
 
   @override
