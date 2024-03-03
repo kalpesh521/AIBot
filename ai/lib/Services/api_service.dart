@@ -135,7 +135,7 @@ class ApiService {
         body: jsonEncode({
           "model": "gpt-3.5-turbo",
           "messages": messages,
-          "max_tokens": 20,
+          "max_tokens": 40,
         }),
       );
 

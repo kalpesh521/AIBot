@@ -3,6 +3,7 @@ import 'package:ai/Provider/ChatProvider.dart';
 import 'package:ai/Provider/voice_provider.dart';
 import 'package:ai/Screens/chat_screen.dart';
 import 'package:ai/Screens/home_screen.dart';
+import 'package:ai/Screens/imggen_screen.dart';
 import 'package:ai/Screens/voice_chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -43,7 +44,8 @@ class _MyAppState extends State<MyApp> {
           //   '/home': (context) => HomeScreen(),
           // }
           // home: ChatScreen(),
-           home: VoiceChatScreen(),
+          //  home: VoiceChatScreen(),
+           home: ImgGenScreen(),
           ),
     );
   }
