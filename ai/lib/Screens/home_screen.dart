@@ -3,7 +3,7 @@ import 'package:ai/Services/assets_manager.dart';
 import 'package:ai/Widget/appbar.dart';
 import 'package:ai/Widget/bottom_navbar.dart';
 import 'package:ai/Widget/card_widget.dart';
-import 'package:ai/Widget/motion.dart';
+import 'package:ai/Widget/Bottom_navbar/motion.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
