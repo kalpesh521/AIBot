@@ -62,8 +62,8 @@ class _MyAppState extends State<MyApp> {
         // home: ChatScreen(),
         //  home: VoiceChatScreen(),
         //  home: ImgGenScreen(),
-        // home: ProviderLogin(),
-        home: ProviderRegistration(),
+        home: ProviderLogin(),
+        // home: ProviderRegistration(),
       ),
     );
   }

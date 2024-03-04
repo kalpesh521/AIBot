@@ -1,3 +1,4 @@
+import 'package:ai/Screens/get_started_screen.dart';
 import 'package:ai/Screens/home_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -155,7 +156,7 @@ class _ProviderLoginState extends State<ProviderLogin> {
     try {
       if (await _providerState.LoginUser(email, password)) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            context, MaterialPageRoute(builder: (context) =>  GetStarted()));
 
         Fluttertoast.showToast(
           msg: 'Successfully Logged In',
