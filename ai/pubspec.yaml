@@ -49,6 +49,13 @@ dependencies:
   motion_tab_bar: ^2.0.4
   animate_do: ^3.3.4
   flutter_tts: ^3.8.5
+  velocity_x: ^4.1.2
+  firebase_auth: ^4.17.6
+  get: ^4.6.6
+  flutter_svg: ^2.0.10+1
+  cloud_firestore: ^4.15.6
+  firebase_core: ^2.25.5
+  fluttertoast: ^8.2.4
   
 
 dev_dependencies:

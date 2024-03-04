@@ -17,7 +17,7 @@ class _MotionTabBarWidgetState extends State<MotionTabBarWidget>
   void initState() {
     super.initState();
     _motionTabBarController = MotionTabBarController(
-      initialIndex: 1,
+      initialIndex: 2,
       length: 3,
       vsync: this,
     );
@@ -35,11 +35,13 @@ class _MotionTabBarWidgetState extends State<MotionTabBarWidget>
       controller: _motionTabBarController,
       initialSelectedTab: "Home",
       useSafeArea: true,
-      labels: const ["Home", "Profile", "Settings"],
-      icons: const [Icons.home, Icons.people_alt, Icons.settings],
+      labels: const ["Profile", "Home", "Settings"],
+      icons: const [Icons.people_alt_rounded, Icons.home, Icons.settings],
       tabBarHeight: 55,
       textStyle: TextStyle(
-        fontSize: 12,
+        fontSize: 13,
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w700,
         color: Theme.of(context).colorScheme.onPrimary,
       ),
       tabIconColor:  Theme.of(context).colorScheme.secondary,

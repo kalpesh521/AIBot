@@ -67,7 +67,9 @@ class _ImgGenScreenState extends State<ImgGenScreen> {
   @override
   Widget build(BuildContext context) {
     ApiService apiService = ApiService();
-    return Scaffold(
+    return Material(
+        color:Theme.of(context).colorScheme.secondary,
+        child: Scaffold(
       appBar: AppBarWidget(
         showBackButton: true,
         title: 'ImgGen',
@@ -88,103 +90,165 @@ class _ImgGenScreenState extends State<ImgGenScreen> {
                   ),
                 ),
               ),
-              if (_isLoading)
-                CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                ),
-              if (generatedImageUrl != null && !_isLoading)
-                Padding(
-                  padding: const EdgeInsets.all(40.0),
-                  child: Container(
-                    height:250,width:250,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                         ),
-                      ],
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        generatedImageUrl!,
-                        width: 200, // Adjust width as needed
-                        height: 200, // Adjust height as needed
+              Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(30.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (_isLoading)
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 50,
+                          ),
+                          CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.blue),
+                          ),
+                          SizedBox(height: 30),
+                          Text(
+                            'Generating image...',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color: Theme.of(context).colorScheme.tertiary),
+                          ),
+                        ],
                       ),
+                    SizedBox(
+                      height: 15,
                     ),
-                  ),
+                    if (generatedImageUrl != null && !_isLoading)
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          width: 250,
+                          height: 250,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .tertiary
+                                    .withOpacity(0.5),
+                                offset: Offset(4, 4),
+                                blurRadius: 6,
+                                spreadRadius: 1,
+                              ),
+                              BoxShadow(
+                                color: Colors.white,
+                                offset: Offset(-2, -2),
+                                blurRadius: 3,
+                                spreadRadius: 1,
+                              ),
+                            ],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.network(
+                              generatedImageUrl!,
+                              width: 250,
+                              height: 250,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    if (generatedImageUrl == null && !_isLoading)
+                      Text.rich(
+                        TextSpan(
+                          text: 'Tap on the mic\n to generate an image ',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Theme.of(context).colorScheme.tertiary),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                  ],
                 ),
-              if (_isLoading && generatedImageUrl == null)
-                Text(
-                  'Generating image...',
-                  style: TextStyle(fontSize: 18),
-                ),
-              if (generatedImageUrl == null && !_isLoading)
-                Text(
-                  'Tap on the mic to generate an image',
-                  style: TextStyle(fontSize: 18),
-                ),
+              ),
             ],
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Padding(
-          padding: EdgeInsets.only(bottom: 50.0),
-          child: AvatarGlow(
-            glowShape: BoxShape.circle,
-            animate: _isListening,
-            duration: Duration(milliseconds: 2000),
-            glowColor: Theme.of(context).colorScheme.secondary,
-            repeat: true,
-            startDelay: Duration(milliseconds: 100),
-            glowCount: 5,
-            glowRadiusFactor: 0.7,
-            curve: Curves.fastOutSlowIn,
-            child: GestureDetector(
-              onTap: () async {
-                if (!_isListening) {
-                  var available = await speechToText.initialize();
-                  if (available) {
-                    setState(() {
-                      _isListening = true;
-                      speechToText.listen(onResult: (result) {
-                        setState(() async {
-                          var text = result.recognizedWords;
-                          print(
-                              "============================ Voice Text: $text");
-                          globalText = text;
+        padding: EdgeInsets.only(bottom: 50.0),
+        child: Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                
+                BoxShadow(
+                  color:  Theme.of(context).colorScheme.onSecondary ,
+                  offset: Offset(4,4 ),
+                  blurRadius: 6,
+                  spreadRadius: 1,
+                ),
+              ],
+            ),
+            child: AvatarGlow(
+              glowShape: BoxShape.circle,
+              animate: _isListening,
+              duration: Duration(milliseconds: 2000),
+              glowColor: Theme.of(context).colorScheme.secondary,
+              repeat: true,
+              startDelay: Duration(milliseconds: 100),
+              glowCount: 5,
+              glowRadiusFactor: 0.7,
+              curve: Curves.fastOutSlowIn,
+              child: GestureDetector(
+                onTap: () async {
+                  if (!_isListening) {
+                    var available = await speechToText.initialize();
+                    if (available) {
+                      setState(() {
+                        _isListening = true;
+                        speechToText.listen(onResult: (result) {
+                          setState(() async {
+                            var text = result.recognizedWords;
+                            print(
+                                "============================ Voice Text: $text");
+                            globalText = text;
+                          });
                         });
                       });
-                    });
-                  }
-                } else {
-                  setLoadingState(true);
-                  speechToText.stop();
-                  setListeningState(false);
-                  print("final$globalText");
+                    }
+                  } else {
+                    setLoadingState(true);
+                    speechToText.stop();
+                    setListeningState(false);
+                    print("final$globalText");
 
-                  generatedImageUrl = await apiService.dallEAPI(globalText);
-                  setLoadingState(false);
-                  setState(() {});
-                  print(generatedImageUrl);
-                }
-              },
-              child: CircleAvatar(
-                radius: 35,
-                backgroundColor: Theme.of(context)
-                    .colorScheme
-                    .secondary, // Avatar background color
-                child: Icon(
-                  _isListening ? Icons.stop : Icons.mic,
-                  color: Theme.of(context)
+                    generatedImageUrl = await apiService.dallEAPI(globalText);
+                    setLoadingState(false);
+                    setState(() {});
+                    print(generatedImageUrl);
+                  }
+                },
+                child: CircleAvatar(
+                  radius: 35,
+                  backgroundColor: Theme.of(context)
                       .colorScheme
-                      .primary, // Icon color based on listening state
+                      .secondary, // Avatar background color
+                  child: Icon(
+                    _isListening ? Icons.stop : Icons.mic,
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primary, // Icon color based on listening state
+                  ),
                 ),
               ),
-            ),
-          )),
-    );
+            )),
+      ),
+    ));
   }
 }

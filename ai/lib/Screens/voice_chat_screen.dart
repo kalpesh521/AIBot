@@ -76,9 +76,9 @@ class _VoiceChatScreenState extends State<VoiceChatScreen> {
               child: Padding(
                 padding: EdgeInsets.only(top: 80),
                 child: Image(
-                  image: AssetImage('assets/images/sound.png'),
-                  height: 150,
-                  width: 150,
+                  image: AssetImage('assets/images/ai-bot.png'),
+                  height: 200,
+                  width: 200,
                 ),
               ),
             ),

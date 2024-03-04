@@ -1,5 +1,9 @@
+ import 'package:ai/Provider/auth_provider.dart';
+import 'package:ai/Screens/login_screen.dart';
 import 'package:ai/Services/assets_manager.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -11,24 +15,28 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProviderState _providerState =
+        Provider.of<ProviderState>(context, listen: false);
+
     return AppBar(
-      // leading: showBackButton ? BackButton(color: Theme.of(context).colorScheme.secondary): null,
       automaticallyImplyLeading: false,
-      leadingWidth: 100,
+      leadingWidth: 40,
       leading: showBackButton
-          ? IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Theme.of(context).colorScheme.secondary,
+          ? Center(
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Theme.of(context).colorScheme.secondary,
+                  size: 25,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
               ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
             )
           : null,
-      backgroundColor: Theme.of(context)
-          .colorScheme
-          .onSecondary, // Use the provided color or default to white
+      backgroundColor: Theme.of(context).colorScheme.onSecondary,
       elevation: 9,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -48,6 +56,19 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: InkWell(
+            onTap: () {
+              _providerState.signOut();
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => ProviderLogin()));
+            },
+            child: Icon(Icons.exit_to_app, color: Colors.blue),
+          ),
+        ),
+      ],
     );
   }
 
