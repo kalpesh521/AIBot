@@ -3,180 +3,98 @@ import 'package:ai/Screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
-class GetStarted extends StatefulWidget {
-  @override
-  State<GetStarted> createState() => _GetStartedState();
-}
-
-class _GetStartedState extends State<GetStarted> {
-  void initState() {
-    super.initState();
-  }
-
+class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Color.fromARGB(255, 255, 255, 255),
-        child: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              right: 0,
-              child: ClipPath(
-                clipper: ClipUpClipper(),
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  color: Color(0xFFFFE8C7),
-                ),
+      backgroundColor: Colors.white,
+      body: Stack(
+        children: [
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+           ),
+          Positioned(
+            top: 150, 
+            left: (MediaQuery.of(context).size.width - 300) /
+                2, 
+            child: Center(
+              child: Image(
+                image: AssetImage('assets/images/chatbot1.jpg'),
+                height: 300,
+                width: 300,
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(height: 120),
-                Image.asset(
-                  'assets/images/ai-bot.png',
-                  width: 300,
-                  height: 300,
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              height: 260,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.secondary,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(35),
+                  topRight: Radius.circular(35),
                 ),
-                SizedBox(height: 10),
-                Row(
-                  children: [
-                    SizedBox(width: 30),
-                    Text(
-                      'Advanced Mobile Features: ',
-                      style: TextStyle(
-                        color: Colors.orange,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Poppins',
-                      ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'AI Assistant',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SizedBox(width: 30),
-                    Text(
-                      'VoiceChat, Image Generation',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SizedBox(width: 30),
-                    Text(
-                      ' ',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-                    Text(
-                      ' and PDF Summarization',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: 25),
-                  child: Container(
-                    height: 5,
-                    width: 130,
-                    color: Colors.orange,
                   ),
-                ),
-                SizedBox(height: 45),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          child: HomeScreen(),
-                          type: PageTransitionType.leftToRight,
-                          duration: Duration(milliseconds: 700),
+                   Text(
+                    'in your pocket',
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 35,
+                          ),
                         ),
-                      );
-                    },
-                    child: Text(
-                      "GET STARTED",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Poppins',
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              child: HomeScreen(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'Get Started',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        
                       ),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                        Color.fromRGBO(67, 2, 102, 1),
-                      ),
-                      padding: MaterialStateProperty.all(
-                        EdgeInsets.symmetric(horizontal: 35),
-                      ),
-                    ),
+                    ],
                   ),
-                ),
-                Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: ClipPath(
-                      clipper: clipDownClipper(),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        color: Color(0xFFEAD4EA),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
-}
-
-class ClipUpClipper extends CustomClipper<Path> {
-  Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(size.width, 0);
-    path.lineTo(size.width, size.height);
-    path.quadraticBezierTo(0, size.height, 0, 0);
-
-    return path;
-  }
-
-  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
-}
-
-class clipDownClipper extends CustomClipper<Path> {
-  Path getClip(Size size) {
-    Path path = Path();
-    path.lineTo(0, size.height);
-    path.lineTo(size.width, size.height);
-    path.quadraticBezierTo(size.width, 0, 0, 0);
-
-    return path;
-  }
-
-  bool shouldReclip(CustomClipper<Path> oldClipper) => true;
 }

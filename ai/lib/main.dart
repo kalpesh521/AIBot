@@ -1,3 +1,4 @@
+import 'package:ai/Screens/get_started_screen.dart';
 import 'package:ai/Screens/settings_screen.dart';
 import 'package:ai/utils/Constants/theme.dart';
 import 'package:ai/Provider/ChatProvider.dart';
@@ -56,7 +57,8 @@ class _MyAppState extends State<MyApp> {
         theme: lightTheme,
         darkTheme: darkTheme,
         themeMode: ThemeMode.light,
-        home: HomeScreen(),
+        // home: HomeScreen(),
+        home :GetStarted(),
         // initialRoute: '/home',
         routes: {
           '/home': (context) => HomeScreen(),
