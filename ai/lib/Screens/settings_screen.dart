@@ -107,7 +107,7 @@ class _SettingScreenState extends State<SettingScreen> {
                           ),
                           SizedBox(height: 5),
                           Text(
-                            "Experience seamless interaction with our AI conversational agent, delivering contextually relevant responses and supporting voice-based interactions, while effortlessly translating ideas into exceptionally accurate images",
+                            "Experience seamless interaction with our AI conversational agent, delivering contextually relevant responses and supporting voice-based interactions, while effortlessly translating ideas into exceptionally accurate images.",
                             style: TextStyle(
                               fontSize: 13,
                               color: Theme.of(context).colorScheme.tertiary,
