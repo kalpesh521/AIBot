@@ -1,4 +1,4 @@
- import 'package:ai/Provider/auth_provider.dart';
+import 'package:ai/Provider/auth_provider.dart';
 import 'package:ai/Screens/login_screen.dart';
 import 'package:ai/Services/assets_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,9 +15,6 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    ProviderState _providerState =
-        Provider.of<ProviderState>(context, listen: false);
-
     return AppBar(
       automaticallyImplyLeading: false,
       leadingWidth: 40,
@@ -56,19 +53,6 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
       ),
-      actions: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-          child: InkWell(
-            onTap: () {
-              _providerState.signOut();
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => ProviderLogin()));
-            },
-            child: Icon(Icons.exit_to_app, color: Colors.blue),
-          ),
-        ),
-      ],
     );
   }
 

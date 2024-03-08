@@ -16,6 +16,8 @@ class ProviderDashboard extends StatelessWidget {
           children: [
             Text("UID: ${_providerState.getUid}"),
             Text("Email : ${_providerState.getEmail}"),
+            Text("Email : ${_providerState.getFirstName}"),
+            Text("Email : ${_providerState.getLastName}"),
             ElevatedButton(onPressed: (){
               //logout
               _providerState.signOut();

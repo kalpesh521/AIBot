@@ -57,6 +57,7 @@ dependencies:
   firebase_core: ^2.25.5
   fluttertoast: ^8.2.4
   page_transition: ^2.1.0
+  image_picker: ^1.0.7
   
 
 dev_dependencies:

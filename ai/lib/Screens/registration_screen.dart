@@ -1,12 +1,9 @@
-import 'dart:async';
-
 import 'package:ai/Screens/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:flutter/material.dart';
 import 'package:ai/Provider/auth_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProviderRegistration extends StatefulWidget {
   @override
@@ -14,26 +11,30 @@ class ProviderRegistration extends StatefulWidget {
 }
 
 class _ProviderRegistrationState extends State<ProviderRegistration> {
-  final TextEditingController firstn = TextEditingController();
-  final TextEditingController lastn = TextEditingController();
+  final firestore = FirebaseFirestore.instance;
+  late bool _obscureText = true;
+  final TextEditingController firstname = TextEditingController();
+  final TextEditingController lastname = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
-
+ 
   void _signUp(String email, String password, BuildContext context) async {
     ProviderState _providerState =
         Provider.of<ProviderState>(context, listen: false);
     try {
-      if (await _providerState.signUpUser(email, password)) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => ProviderLogin()));
-
-        ScaffoldMessenger.of(context).showSnackBar(
+      if (await _providerState.signUpUser(
+          email, password, firstname.text, lastname.text )) {
+            ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('You are Successfully registered !'),
             duration: Duration(seconds: 3),
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.green,
           ),
         );
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => ProviderLogin()));
+
+        
       }
     } catch (e) {
       print(e);
@@ -72,7 +73,7 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                     child: TextField(
-                      controller: firstn,
+                      controller: firstname,
                       decoration: InputDecoration(
                         hintText: 'First Name',
                         hintStyle: TextStyle(color: Colors.black),
@@ -96,7 +97,7 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                     child: TextField(
-                      controller: lastn,
+                      controller: lastname,
                       decoration: InputDecoration(
                         hintText: 'Last Name',
                         hintStyle: TextStyle(color: Colors.black),
@@ -141,29 +142,45 @@ class _ProviderRegistrationState extends State<ProviderRegistration> {
                     ),
                   ),
                   HeightBox(20),
+                   
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                    child: TextField(
-                      controller: password,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle: TextStyle(color: Colors.black),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide(color: Colors.black),
+                      padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                      child: TextField(
+                        obscureText:
+                            _obscureText, // State variable to control password visibility
+                        controller: password,
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          hintStyle: TextStyle(color: Colors.black),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(color: Colors.black),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: BorderSide(
+                                color: Theme.of(context).colorScheme.secondary,
+                              )),
+                          isDense: true,
+                          contentPadding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _obscureText =
+                                    !_obscureText; // Toggle password visibility
+                              });
+                            },
+                            child: Icon(
+                              _obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: new BorderRadius.circular(10.0),
-                            borderSide: BorderSide(
-                              color: Theme.of(context).colorScheme.secondary,
-                            )),
-                        isDense: true, // Added this
-                        contentPadding: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                      ),
-                      cursorColor: Colors.white,
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                        cursorColor: Colors.black,
+                        style: TextStyle(color: Colors.black),
+                      )),
                   HeightBox(20),
                   GestureDetector(
                     onTap: () {

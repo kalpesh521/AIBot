@@ -1,10 +1,12 @@
+import 'package:ai/Provider/auth_provider.dart';
 import 'package:ai/Screens/chat_screen.dart';
 import 'package:ai/Services/assets_manager.dart';
 import 'package:ai/Widget/appbar.dart';
 import 'package:ai/Widget/bottom_navbar.dart';
 import 'package:ai/Widget/card_widget.dart';
-import 'package:ai/Widget/Bottom_navbar/motion.dart';
+import 'package:ai/Widget/bottom_motion_tabbar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,12 +16,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    ProviderState _providerState =
+        Provider.of<ProviderState>(context, listen: false);
+
     return Container(
       child: Scaffold(
         //  AppBar
         appBar: const AppBarWidget(
           title: 'Genie.AI',
-          showBackButton: false,  
+          showBackButton: false,
         ),
 
         // Body of the scaffold
@@ -29,17 +34,31 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Welcome John ',
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 20,
-                    color: Theme.of(context).colorScheme.onPrimary,
+                RichText(
+                  text: TextSpan(
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "Hello ",
+                        style: TextStyle(
+                          color:  Theme.of(context).colorScheme.onPrimary, // Change color for "Hello"
+                        ),
+                      ),
+                      TextSpan(
+                        text: "${_providerState.getFirstName.toString()}.",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary, // Change color for the user's first name
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Text(
-                  "I'm your Assistant !",
+                  "I'm your AI Assistant !",
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w600,

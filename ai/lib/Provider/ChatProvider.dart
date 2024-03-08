@@ -1,4 +1,4 @@
-import 'package:ai/Models/chat_model.dart';
+import 'package:ai/models/chat_model.dart';
 import 'package:ai/Services/api_service.dart';
 import 'package:flutter/foundation.dart';
 

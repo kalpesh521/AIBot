@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ai/Constants/theme.dart';
+import 'package:ai/utils/Constants/theme.dart';
 
 import 'package:ai/Screens/chat_screen.dart';
 

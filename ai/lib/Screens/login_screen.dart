@@ -21,7 +21,7 @@ class ProviderLogin extends StatefulWidget {
 class _ProviderLoginState extends State<ProviderLogin> {
   TextEditingController email = TextEditingController();
   TextEditingController pass = TextEditingController();
-
+  late bool _obscureText=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,30 +77,44 @@ class _ProviderLoginState extends State<ProviderLogin> {
                 ),
                 HeightBox(20),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                  child: TextField(
-                    controller: pass,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      hintStyle: TextStyle(color: Colors.black),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: new BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                          color: Colors.black,
+                    padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+                    child: TextField(
+                      obscureText:
+                          _obscureText, // State variable to control password visibility
+                      controller: pass,
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        hintStyle: TextStyle(color: Colors.black),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: BorderSide(color: Colors.black),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: BorderSide(
+                              color: Theme.of(context).colorScheme.secondary,
+                            )),
+                        isDense: true,
+                        contentPadding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _obscureText =
+                                  !_obscureText; // Toggle password visibility
+                            });
+                          },
+                          child: Icon(
+                            _obscureText
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: new BorderRadius.circular(10.0),
-                          borderSide: BorderSide(
-                            color: Theme.of(context).colorScheme.secondary,
-                          )),
-                      isDense: true, // Added this
-                      contentPadding: EdgeInsets.fromLTRB(10, 20, 10, 10),
-                    ),
-                    cursorColor: Colors.black,
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
+                      cursorColor: Colors.black,
+                      style: TextStyle(color: Colors.black),
+                    )),
+
                 HeightBox(20),
 
                 // GestureDetector(onTap: (){
@@ -125,7 +139,7 @@ class _ProviderLoginState extends State<ProviderLogin> {
                 GestureDetector(
                     onTap: () {
                       print("Login Clicked Event");
-                      _Login(email.text, pass.text, context);
+                      _LoginUser(email.text, pass.text, context);
                     },
                     child: "LOGIN"
                         .text
@@ -150,13 +164,13 @@ class _ProviderLoginState extends State<ProviderLogin> {
     );
   }
 
-  void _Login(String email, String password, BuildContext context) async {
+  void _LoginUser(String email, String password, BuildContext context) async {
     ProviderState _providerState =
         Provider.of<ProviderState>(context, listen: false);
     try {
-      if (await _providerState.LoginUser(email, password)) {
+      if (await _providerState.loginUser(email, password)) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) =>  GetStarted()));
+            context, MaterialPageRoute(builder: (context) =>   GetStarted ()));
 
         Fluttertoast.showToast(
           msg: 'Successfully Logged In',

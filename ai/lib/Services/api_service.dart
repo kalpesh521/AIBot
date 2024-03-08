@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:ai/Constants/api_constants.dart';
-import 'package:ai/Models/Models.dart';
-import 'package:ai/Models/chat_model.dart';
+import 'package:ai/utils/Constants/api_constants.dart';
+import 'package:ai/models/Models.dart';
+import 'package:ai/models/chat_model.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {

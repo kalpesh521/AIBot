@@ -44,17 +44,28 @@ class _MotionTabBarWidgetState extends State<MotionTabBarWidget>
         fontWeight: FontWeight.w700,
         color: Theme.of(context).colorScheme.onPrimary,
       ),
-      tabIconColor:  Theme.of(context).colorScheme.secondary,
+      tabIconColor: Theme.of(context).colorScheme.secondary,
       tabIconSize: 28.0,
       tabIconSelectedSize: 26.0,
-      tabSelectedColor:Theme.of(context).colorScheme.secondary,
+      tabSelectedColor: Theme.of(context).colorScheme.secondary,
       tabIconSelectedColor: Theme.of(context).colorScheme.primary,
-      tabBarColor:Theme.of(context).colorScheme.primary,
+      tabBarColor: Theme.of(context).colorScheme.primary,
       onTabItemSelected: (int value) {
         setState(() {
           _motionTabBarController.index = value;
         });
+        switch (value) {
+          case 0: // Profile tab
+            Navigator.of(context).pushNamed('/profile');
+            break;
+          case 1: // Home tab
+            Navigator.of(context).pushNamed('/home');
+            break;
+          case 2: // Settings tab
+            Navigator.of(context).pushNamed('/settings');
+            break;
+        }
       },
     );
-  }
+  } 
 }

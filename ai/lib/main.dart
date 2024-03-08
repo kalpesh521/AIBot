@@ -1,4 +1,5 @@
-import 'package:ai/Constants/theme.dart';
+import 'package:ai/Screens/settings_screen.dart';
+import 'package:ai/utils/Constants/theme.dart';
 import 'package:ai/Provider/ChatProvider.dart';
 import 'package:ai/Provider/auth_provider.dart';
 import 'package:ai/Provider/voice_provider.dart';
@@ -6,6 +7,7 @@ import 'package:ai/Screens/chat_screen.dart';
 import 'package:ai/Screens/home_screen.dart';
 import 'package:ai/Screens/imggen_screen.dart';
 import 'package:ai/Screens/login_screen.dart';
+import 'package:ai/Screens/profile_screen.dart';
 import 'package:ai/Screens/registration_screen.dart';
 import 'package:ai/Screens/voice_chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -54,16 +56,19 @@ class _MyAppState extends State<MyApp> {
         theme: lightTheme,
         darkTheme: darkTheme,
         themeMode: ThemeMode.light,
-        // home: HomeScreen(),
+        home: HomeScreen(),
         // initialRoute: '/home',
-        // routes: {
-        //   '/home': (context) => HomeScreen(),
-        // }
+        routes: {
+          '/home': (context) => HomeScreen(),
+          '/profile': (context) => EditProfilePage(),
+          '/settings': (context) => SettingScreen(),
+         }
         // home: ChatScreen(),
         //  home: VoiceChatScreen(),
         //  home: ImgGenScreen(),
-        home: ProviderLogin(),
+        // home: ProviderLogin(),
         // home: ProviderRegistration(),
+        // home: EditProfilePage(),
       ),
     );
   }
