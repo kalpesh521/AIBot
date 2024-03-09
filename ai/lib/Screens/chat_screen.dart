@@ -259,8 +259,7 @@ class _ChatScreenState extends State<ChatScreen> {
         );
         textEditingController.clear();
         setListeningState(false);
-        // Remove the listener after receiving a response
-      }
+       }
     });
   }
 

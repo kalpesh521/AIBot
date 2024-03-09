@@ -1,5 +1,5 @@
-import 'package:ai/Screens/login_screen.dart';
-import 'package:ai/Provider/auth_provider.dart';
+import 'package:ai/Screens/signIn_screen.dart';
+ import 'package:ai/Provider/auth_provider.dart';
 import 'package:ai/Widget/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -136,7 +136,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ProviderLogin()));
+                              builder: (context) =>  LoginPage()));
                     },
                     child: ListTile(
                       leading: Icon(Icons.exit_to_app, color: Colors.red),

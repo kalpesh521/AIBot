@@ -50,7 +50,7 @@ class GetStarted extends StatelessWidget {
                     ),
                   ),
                    Text(
-                    'in your pocket',
+                    'in Your Pocket',
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -78,7 +78,7 @@ class GetStarted extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          'Get Started',
+                          'GET STARTED',
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,

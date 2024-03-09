@@ -1,5 +1,7 @@
+import 'package:ai/Screens/signIn_screen.dart';
 import 'package:ai/Screens/get_started_screen.dart';
 import 'package:ai/Screens/settings_screen.dart';
+import 'package:ai/Screens/splash_screen.dart';
 import 'package:ai/utils/Constants/theme.dart';
 import 'package:ai/Provider/ChatProvider.dart';
 import 'package:ai/Provider/auth_provider.dart';
@@ -7,10 +9,8 @@ import 'package:ai/Provider/voice_provider.dart';
 import 'package:ai/Screens/chat_screen.dart';
 import 'package:ai/Screens/home_screen.dart';
 import 'package:ai/Screens/imggen_screen.dart';
-import 'package:ai/Screens/login_screen.dart';
-import 'package:ai/Screens/profile_screen.dart';
-import 'package:ai/Screens/registration_screen.dart';
-import 'package:ai/Screens/voice_chat_screen.dart';
+ import 'package:ai/Screens/profile_screen.dart';
+ import 'package:ai/Screens/voice_chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -53,25 +53,27 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.light,
-        // home: HomeScreen(),
-        home :GetStarted(),
-        // initialRoute: '/home',
-        routes: {
-          '/home': (context) => HomeScreen(),
-          '/profile': (context) => EditProfilePage(),
-          '/settings': (context) => SettingScreen(),
-         }
-        // home: ChatScreen(),
-        //  home: VoiceChatScreen(),
-        //  home: ImgGenScreen(),
-        // home: ProviderLogin(),
-        // home: ProviderRegistration(),
-        // home: EditProfilePage(),
-      ),
+          debugShowCheckedModeBanner: false,
+          theme: lightTheme,
+          darkTheme: darkTheme,
+          themeMode: ThemeMode.light,
+          // home: SplashScreen(),
+          // home: HomeScreen(),
+          // home :GetStarted(),
+          // home: LoginPage(),
+          // initialRoute: '/home',
+          routes: {
+            '/home': (context) => HomeScreen(),
+            '/profile': (context) => EditProfilePage(),
+            '/settings': (context) => SettingScreen(),
+          },
+          // home: ChatScreen(),
+          home: VoiceChatScreen(),
+          // home: ImgGenScreen(),
+          // home: ProviderLogin(),
+          // home: ProviderRegistration(),
+          // home: EditProfilePage(),
+          ),
     );
   }
 }

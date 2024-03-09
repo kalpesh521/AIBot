@@ -165,7 +165,7 @@ class _ImgGenScreenState extends State<ImgGenScreen> {
                     if (generatedImageUrl == null && !_isLoading)
                       Text.rich(
                         TextSpan(
-                          text: 'Tap on the mic\n to generate an image ',
+                          text: 'Tap the mic\n to generate an image ',
                           style: TextStyle(
                               fontSize: 18,
                               color: Theme.of(context).colorScheme.tertiary),

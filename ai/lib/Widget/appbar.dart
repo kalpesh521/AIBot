@@ -1,6 +1,5 @@
 import 'package:ai/Provider/auth_provider.dart';
-import 'package:ai/Screens/login_screen.dart';
-import 'package:ai/Services/assets_manager.dart';
+ import 'package:ai/Services/assets_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,11 +38,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            AssetsManager.botImage,
+            'assets/images/bot.png',
             width: 40.0,
             height: 40.0,
           ),
-          SizedBox(width: 5),
+          SizedBox(width: 8),
           Text(
             title,
             style: TextStyle(
