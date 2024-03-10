@@ -9,18 +9,18 @@ import 'package:ai/Provider/voice_provider.dart';
 import 'package:ai/Screens/chat_screen.dart';
 import 'package:ai/Screens/home_screen.dart';
 import 'package:ai/Screens/imggen_screen.dart';
- import 'package:ai/Screens/profile_screen.dart';
- import 'package:ai/Screens/voice_chat_screen.dart';
+import 'package:ai/Screens/profile_screen.dart';
+import 'package:ai/Screens/voice_chat_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:provider/provider.dart';
+ import 'package:provider/provider.dart';
 
 void main() async {
   await dotenv.load(fileName: "assets/.env");
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+   await Firebase.initializeApp(
       options: const FirebaseOptions(
     apiKey:
         "AIzaSyBwWP_PHK2GLo6SrN6kINSANhCitAVSyPs", // paste your api key here
@@ -53,27 +53,27 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          themeMode: ThemeMode.light,
-          // home: SplashScreen(),
-          // home: HomeScreen(),
-          // home :GetStarted(),
-          // home: LoginPage(),
-          // initialRoute: '/home',
-          routes: {
-            '/home': (context) => HomeScreen(),
-            '/profile': (context) => EditProfilePage(),
-            '/settings': (context) => SettingScreen(),
-          },
-          // home: ChatScreen(),
-          home: VoiceChatScreen(),
-          // home: ImgGenScreen(),
-          // home: ProviderLogin(),
-          // home: ProviderRegistration(),
-          // home: EditProfilePage(),
-          ),
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.light,
+        // home: SplashScreen(),
+        // home: HomeScreen(),
+        // home :GetStarted(),
+        // home: LoginPage(),
+        // initialRoute: '/home',
+        routes: {
+          '/home': (context) => HomeScreen(),
+          '/profile': (context) => EditProfilePage(),
+          '/settings': (context) => SettingScreen(),
+        },
+        // home: ChatScreen(),
+        // home: VoiceChatScreen(),
+        home: ImgGenScreen(),
+        // home: ProviderLogin(),
+        // home: ProviderRegistration(),
+        // home: EditProfilePage(),
+      ),
     );
   }
 }

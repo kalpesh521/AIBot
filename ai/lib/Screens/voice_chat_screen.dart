@@ -58,6 +58,7 @@ class _VoiceChatScreenState extends State<VoiceChatScreen> {
  
     ApiService apiService = ApiService();
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.onSecondary,
       appBar: AppBarWidget(
         showBackButton: true,
         title: 'VoiceChat',
