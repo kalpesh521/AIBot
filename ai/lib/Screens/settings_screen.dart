@@ -1,7 +1,8 @@
 import 'package:ai/Screens/signIn_screen.dart';
- import 'package:ai/Provider/auth_provider.dart';
+import 'package:ai/Provider/auth_provider.dart';
 import 'package:ai/Widget/appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:ai/Widget/bottom_motion_tabbar.dart';
 
@@ -90,7 +91,8 @@ class _SettingScreenState extends State<SettingScreen> {
                             color: Theme.of(context).colorScheme.secondary),
                       ],
                     ),
-                    SizedBox(width: 13), // Add spacing between icon and ListTile
+                    SizedBox(
+                        width: 13), // Add spacing between icon and ListTile
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,10 +135,15 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: InkWell(
                     onTap: () {
                       _providerState.signOut();
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>  LoginPage()));
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('You are Logged Out !'),
+                          duration: Duration(seconds: 2),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
                     },
                     child: ListTile(
                       leading: Icon(Icons.exit_to_app, color: Colors.red),

@@ -14,21 +14,52 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Future<bool> _onBackButtonPressed(BuildContext context) async {
+  bool? exitapp = await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Are you sure ?'),
+          content: Text("Do you want to exit ?"),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+                child: Text("No",style: TextStyle(
+                color: Colors.black,
+              ),),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: Text("Yes",style: TextStyle(
+                color: Colors.black,
+              ),),
+            ),
+          ],
+        );
+      });
+
+  return exitapp ?? false;
+}
+
+
   @override
   Widget build(BuildContext context) {
     ProviderState _providerState =
         Provider.of<ProviderState>(context, listen: false);
 
-    return Container(
+    return WillPopScope(
+      onWillPop: () => _onBackButtonPressed(context),
       child: Scaffold(
-        //  AppBar
-        appBar: const AppBarWidget(
+         appBar: const AppBarWidget(
           title: 'Genie.AI',
           showBackButton: false,
         ),
 
-        // Body of the scaffold
-        body: Container(
+         body: Container(
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
@@ -45,13 +76,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       TextSpan(
                         text: "Hello ",
                         style: TextStyle(
-                          color:  Theme.of(context).colorScheme.onPrimary, // Change color for "Hello"
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onPrimary, // Change color for "Hello"
                         ),
                       ),
                       TextSpan(
                         text: "${_providerState.getFirstName.toString()}.",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary, // Change color for the user's first name
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary, // Change color for the user's first name
                         ),
                       ),
                     ],

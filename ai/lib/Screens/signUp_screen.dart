@@ -1,11 +1,10 @@
 import 'package:ai/Provider/auth_provider.dart';
-import 'package:ai/Screens/signIn_screen.dart';
 import 'package:ai/Screens/get_started_screen.dart';
+import 'package:ai/Screens/signIn_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ai/utils/components/my_button.dart';
 import 'package:ai/utils/components/my_textfield.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -29,15 +28,16 @@ class _SignUpPageState extends State<SignUpPage> {
     try {
       if (await _providerState.signUpUser(
           email, password, firstname.text, lastname.text)) {
-        ScaffoldMessenger.of(context).showSnackBar(
+           ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('You are Successfully registered !'),
-            duration: Duration(seconds: 3),
+            content: Text('You are Successfully Registered!',
+            style: TextStyle(fontWeight: FontWeight.bold)),
+            duration: Duration(seconds: 2),
             backgroundColor: Colors.green,
           ),
         );
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+            context, MaterialPageRoute(builder: (context) => GetStarted()));
       }
     } catch (e) {
       print(e);
@@ -51,9 +51,26 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 130),
-
+            children: [const SizedBox(height: 60),
+              Image.asset("assets/images/bot.png", width: 130, height: 130),
+              const SizedBox(height: 5),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text('Aura',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 30, 190, 239),
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    )),
+                Text(
+                  '.ai',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ]),
+              const SizedBox(height: 20),
               Text(
                 'Create Account ',
                 style: TextStyle(
@@ -61,31 +78,25 @@ class _SignUpPageState extends State<SignUpPage> {
                     fontSize: 26,
                     fontWeight: FontWeight.bold),
               ),
-
-              const SizedBox(height: 40),
-
+              const SizedBox(height: 20),
               MyTextField(
                 controller: firstname,
                 hintText: 'First Name',
                 obscureText: false,
               ),
               const SizedBox(height: 10),
-
               MyTextField(
                 controller: lastname,
                 hintText: 'Last Name',
                 obscureText: false,
               ),
               const SizedBox(height: 10),
-
               MyTextField(
                 controller: email,
                 hintText: 'Email',
                 obscureText: false,
               ),
-
               const SizedBox(height: 10),
-
               MyTextField(
                 controller: password,
                 hintText: 'Password',
@@ -94,7 +105,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   onTap: () {
                     setState(() {
                       _obscureText =
-                          !_obscureText; // Toggle password visibility
+                          !_obscureText;  
                     });
                   },
                   child: Icon(
@@ -103,17 +114,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 25),
-
-              // sign in button
               MyButton(
                 onTap: () => _signUp(email.text, password.text, context),
                 buttonText: "SIGN  UP",
               ),
-
               const SizedBox(height: 20),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

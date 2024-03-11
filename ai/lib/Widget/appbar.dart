@@ -1,5 +1,5 @@
 import 'package:ai/Provider/auth_provider.dart';
- import 'package:ai/Services/assets_manager.dart';
+import 'package:ai/Services/assets_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,19 +16,27 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      leadingWidth: 40,
+      leadingWidth: 50,
       leading: showBackButton
           ? Center(
-              child: IconButton(
-                padding: EdgeInsets.zero,
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Theme.of(context).colorScheme.secondary,
-                  size: 25,
+              child: Container(
+                width: 35,
+                height: 35,
+                margin: EdgeInsets.only(left: 15),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white12),
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: Colors.white),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                    color: Theme.of(context).colorScheme.secondary,
+                     size: 20,
+                   ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
               ),
             )
           : null,

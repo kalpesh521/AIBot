@@ -1,6 +1,7 @@
 import 'package:ai/Screens/signIn_screen.dart';
 import 'package:ai/Screens/get_started_screen.dart';
 import 'package:ai/Screens/settings_screen.dart';
+import 'package:ai/Screens/signUp_screen.dart';
 import 'package:ai/Screens/splash_screen.dart';
 import 'package:ai/utils/Constants/theme.dart';
 import 'package:ai/Provider/ChatProvider.dart';
@@ -61,6 +62,7 @@ class _MyAppState extends State<MyApp> {
         // home: HomeScreen(),
         // home :GetStarted(),
         // home: LoginPage(),
+        home: SignUpPage(),
         // initialRoute: '/home',
         routes: {
           '/home': (context) => HomeScreen(),
@@ -69,7 +71,7 @@ class _MyAppState extends State<MyApp> {
         },
         // home: ChatScreen(),
         // home: VoiceChatScreen(),
-        home: ImgGenScreen(),
+        // home: ImgGenScreen(),
         // home: ProviderLogin(),
         // home: ProviderRegistration(),
         // home: EditProfilePage(),
