@@ -28,9 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor:  Theme.of(context).colorScheme.primary,
       body: Container(
-        color: Colors.white,
+        color:  Theme.of(context).colorScheme.primary,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   Text(
                     '.ai',
                     style: TextStyle(
-                      color: Colors.black,
+                      color:  Theme.of(context).colorScheme.onPrimary,
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                     ),

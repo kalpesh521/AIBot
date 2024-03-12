@@ -24,9 +24,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 height: 35,
                 margin: EdgeInsets.only(left: 15),
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white12),
+                    border: Border.all(color:  Theme.of(context).colorScheme.primary),
                     borderRadius: BorderRadius.circular(10.0),
-                    color: Colors.white),
+                    color:   Theme.of(context).colorScheme.primary),
                 child: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios_new_rounded,
@@ -54,8 +54,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           Text(
             title,
             style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w700,
+              color:   Theme.of(context).colorScheme.onPrimary,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ],

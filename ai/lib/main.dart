@@ -16,12 +16,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
- import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   await dotenv.load(fileName: "assets/.env");
   WidgetsFlutterBinding.ensureInitialized();
-   await Firebase.initializeApp(
+  await Firebase.initializeApp(
       options: const FirebaseOptions(
     apiKey:
         "AIzaSyBwWP_PHK2GLo6SrN6kINSANhCitAVSyPs", // paste your api key here
@@ -39,6 +39,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool isDarkMode = false;
+
+  void toggleDarkMode() {
+    setState(() {
+      isDarkMode = !isDarkMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -55,19 +63,21 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: lightTheme,
+        theme: isDarkMode ? darkTheme : lightTheme,
         darkTheme: darkTheme,
         themeMode: ThemeMode.light,
-        // home: SplashScreen(),
+        home: SplashScreen(),
         // home: HomeScreen(),
         // home :GetStarted(),
         // home: LoginPage(),
-        home: SignUpPage(),
+        // home: SignUpPage(),
+        // home: SettingScreen(toggleDarkMode: toggleDarkMode(),),
         // initialRoute: '/home',
         routes: {
           '/home': (context) => HomeScreen(),
           '/profile': (context) => EditProfilePage(),
-          '/settings': (context) => SettingScreen(),
+          '/settings': (context) =>
+              SettingScreen(toggleDarkMode: toggleDarkMode),
         },
         // home: ChatScreen(),
         // home: VoiceChatScreen(),

@@ -15,36 +15,41 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Future<bool> _onBackButtonPressed(BuildContext context) async {
-  bool? exitapp = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Are you sure ?'),
-          content: Text("Do you want to exit ?"),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-                child: Text("No",style: TextStyle(
-                color: Colors.black,
-              ),),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-              child: Text("Yes",style: TextStyle(
-                color: Colors.black,
-              ),),
-            ),
-          ],
-        );
-      });
+    bool? exitapp = await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Are you sure ?'),
+            content: Text("Do you want to exit ?"),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+                child: Text(
+                  "No",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+                child: Text(
+                  "Yes",
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
 
-  return exitapp ?? false;
-}
-
+    return exitapp ?? false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: () => _onBackButtonPressed(context),
       child: Scaffold(
-         appBar: const AppBarWidget(
+        appBar: const AppBarWidget(
           title: 'Genie.AI',
           showBackButton: false,
         ),
 
-         body: Container(
+        body: Container(
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
@@ -76,17 +81,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       TextSpan(
                         text: "Hello ",
                         style: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onPrimary, // Change color for "Hello"
+                          color: Theme.of(context).colorScheme.onPrimary,
                         ),
                       ),
                       TextSpan(
                         text: "${_providerState.getFirstName.toString()}.",
                         style: TextStyle(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary, // Change color for the user's first name
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                     ],
@@ -164,7 +165,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
                 Text(
                   'Explore',
                   style: TextStyle(
@@ -174,6 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     color: Theme.of(context).colorScheme.onPrimary,
                   ),
                 ),
+                SizedBox(height: 10),
                 Expanded(
                   child: Column(
                     children: [
@@ -219,8 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        // bottomBavigationBar of  the scaffold
-        bottomNavigationBar: MotionTabBarWidget(),
+         bottomNavigationBar: MotionTabBarWidget(),
       ),
     );
   }

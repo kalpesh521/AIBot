@@ -43,7 +43,7 @@ class CardWidget extends StatelessWidget {
         );
         break;
       default:
-         break;
+        break;
     }
   }
 
@@ -67,15 +67,13 @@ class CardWidget extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Theme.of(context).colorScheme.onSecondary,
-                    spreadRadius: 1,
-                    blurRadius: 3,
-                    offset: Offset(0, 3),  
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    color: Colors.black.withOpacity(0.1),
+                    offset: Offset(0, 3),
                   ),
                 ],
-                color: Theme.of(context)
-                    .colorScheme
-                    .primary,  
+                color: Theme.of(context).colorScheme.primary,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

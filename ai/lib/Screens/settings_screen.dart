@@ -7,6 +7,9 @@ import 'package:provider/provider.dart';
 import 'package:ai/Widget/bottom_motion_tabbar.dart';
 
 class SettingScreen extends StatefulWidget {
+  final Function toggleDarkMode;
+
+  SettingScreen({required this.toggleDarkMode});
   @override
   _SettingScreenState createState() => _SettingScreenState();
 }
@@ -14,7 +17,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   bool isDarkMode = false;
 
-  void toggleDarkMode() {
+  void btntoggleDarkMode() {
     setState(() {
       isDarkMode = !isDarkMode;
     });
@@ -25,7 +28,6 @@ class _SettingScreenState extends State<SettingScreen> {
     ProviderState _providerState =
         Provider.of<ProviderState>(context, listen: false);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.onSecondary,
       appBar: AppBarWidget(
         showBackButton: false,
         title: 'Settings',
@@ -39,6 +41,14 @@ class _SettingScreenState extends State<SettingScreen> {
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    color: Colors.black.withOpacity(0.1),
+                    offset: Offset(0, 3),
+                  ),
+                ],
               ),
               padding: EdgeInsets.symmetric(horizontal: 5),
               child: ListTile(
@@ -65,7 +75,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 trailing: Switch(
                   value: isDarkMode,
                   onChanged: (value) {
-                    toggleDarkMode();
+                    widget.toggleDarkMode();
+                    btntoggleDarkMode();
                   },
                   activeColor: Theme.of(context).colorScheme.secondary,
                 ),
@@ -77,6 +88,14 @@ class _SettingScreenState extends State<SettingScreen> {
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    color: Colors.black.withOpacity(0.1),
+                    offset: Offset(0, 3),
+                  ),
+                ],
               ),
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Padding(
@@ -91,8 +110,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             color: Theme.of(context).colorScheme.secondary),
                       ],
                     ),
-                    SizedBox(
-                        width: 13), // Add spacing between icon and ListTile
+                    SizedBox(width: 13),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +132,6 @@ class _SettingScreenState extends State<SettingScreen> {
                               fontSize: 13,
                               color: Theme.of(context).colorScheme.tertiary,
                             ),
-                            // textAlign: TextAlign.justify,
                           ),
                         ],
                       ),
@@ -129,6 +146,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      color: Colors.black.withOpacity(0.1),
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 5),
                 child: Center(
@@ -139,7 +164,12 @@ class _SettingScreenState extends State<SettingScreen> {
                           MaterialPageRoute(builder: (context) => LoginPage()));
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('You are Logged Out !'),
+                          content: Text(
+                            'You are Logged Out !',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
                           duration: Duration(seconds: 2),
                           backgroundColor: Colors.red,
                         ),

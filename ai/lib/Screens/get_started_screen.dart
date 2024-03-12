@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:ai/Screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class GetStarted extends StatelessWidget {
   @override
@@ -13,11 +14,10 @@ class GetStarted extends StatelessWidget {
           Container(
             height: double.infinity,
             width: double.infinity,
-           ),
+          ),
           Positioned(
-            top: 150, 
-            left: (MediaQuery.of(context).size.width - 300) /
-                2, 
+            top: 150,
+            left: (MediaQuery.of(context).size.width - 300) / 2,
             child: Center(
               child: Image(
                 image: AssetImage('assets/images/chatbot1.jpg'),
@@ -49,7 +49,7 @@ class GetStarted extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                   Text(
+                  Text(
                     'in Your Pocket',
                     style: TextStyle(
                       fontSize: 30,
@@ -66,7 +66,8 @@ class GetStarted extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                             vertical: 10,
                             horizontal: 35,
-                          ),
+                           ),
+                           primary: Colors.white,
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -85,7 +86,6 @@ class GetStarted extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
-                        
                       ),
                     ],
                   ),

@@ -22,8 +22,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     ProviderState _providerState =
         Provider.of<ProviderState>(context, listen: false);
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.onSecondary,
-      appBar: AppBarWidget(
+       appBar: AppBarWidget(
         showBackButton: false,
         title: 'Profile',
       ),
@@ -89,7 +88,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ? MemoryImage(_image!)
                                 : AssetImage('assets/icons/user.png')
                                     as ImageProvider<Object>,
-                            // image: AssetImage('assets/icons/user.png'),
                           ),
                         ),
                       ),
@@ -150,10 +148,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
         hintStyle: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: Colors.black,
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
         labelStyle: TextStyle(
-          color: Colors.grey,
+          color: Theme.of(context).colorScheme.onPrimary,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),

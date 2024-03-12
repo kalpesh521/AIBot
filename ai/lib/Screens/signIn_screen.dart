@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   '.ai',
                   style: TextStyle(
-                    color: Colors.black,
+                    color:  Theme.of(context).colorScheme.onPrimary,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
@@ -144,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: Text(
                         'Or continue with',
-                        style: TextStyle(color: Colors.grey[700]),
+                        style: TextStyle(color: Colors.grey[700],fontWeight: FontWeight.w800),
                       ),
                     ),
                     Expanded(

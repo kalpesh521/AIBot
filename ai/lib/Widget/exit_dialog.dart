@@ -12,17 +12,23 @@ Future<bool> _onBackButtonPressed(BuildContext context) async {
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
-                child: Text("No",style: TextStyle(
-                color: Colors.black,
-              ),),
+              child: Text(
+                "No",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
-              child: Text("Yes",style: TextStyle(
-                color: Colors.black,
-              ),),
+              child: Text(
+                "Yes",
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
             ),
           ],
         );

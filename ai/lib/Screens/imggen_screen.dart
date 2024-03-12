@@ -217,7 +217,7 @@ class _ImgGenScreenState extends State<ImgGenScreen> {
                                 spreadRadius: 1,
                               ),
                               BoxShadow(
-                                color: Colors.white,
+                                color:   Theme.of(context).colorScheme.primary,
                                 offset: Offset(-2, -2),
                                 blurRadius: 3,
                                 spreadRadius: 1,

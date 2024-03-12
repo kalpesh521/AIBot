@@ -51,8 +51,8 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [const SizedBox(height: 60),
-              Image.asset("assets/images/bot.png", width: 130, height: 130),
+            children: [const SizedBox(height: 50),
+              Image.asset("assets/images/bot.png", width: 120, height: 120),
               const SizedBox(height: 5),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text('Aura',
@@ -64,18 +64,18 @@ class _SignUpPageState extends State<SignUpPage> {
                 Text(
                   '.ai',
                   style: TextStyle(
-                    color: Colors.black,
+                    color:   Theme.of(context).colorScheme.onPrimary,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ]),
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
               Text(
                 'Create Account ',
                 style: TextStyle(
                     color: Colors.grey[700],
-                    fontSize: 26,
+                    fontSize: 24,
                     fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
@@ -114,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 25),
+              const SizedBox(height: 15),
               MyButton(
                 onTap: () => _signUp(email.text, password.text, context),
                 buttonText: "SIGN  UP",

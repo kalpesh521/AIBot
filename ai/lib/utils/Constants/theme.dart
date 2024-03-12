@@ -14,16 +14,15 @@ final lightTheme = ThemeData(
 
 final darkTheme = ThemeData.dark().copyWith(
   colorScheme: ThemeData.dark().colorScheme.copyWith(
-        primary: Colors.blueGrey,
+        primary: Color(0xFF000000),
         onPrimary: Colors.white,
-        secondary: Colors.blueGrey,
-        onSecondary: Colors.white,
+        secondary: Color(0xFF5393f3),
+        onSecondary: Color(0xFF000000),
         tertiary: Color(0xFFff6f00),
         onTertiary: Color(0xFF000000),
       ),
   textTheme: ThemeData.dark().textTheme.copyWith(
         bodyText1: TextStyle(fontFamily: 'Poppins'),
         bodyText2: TextStyle(fontFamily: 'Poppins'),
-        // You can specify more text styles here if needed
       ),
 );
