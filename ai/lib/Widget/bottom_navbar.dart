@@ -7,7 +7,7 @@ class BottomNavigationBarExample extends StatefulWidget {
   State<BottomNavigationBarExample> createState() =>
       _BottomNavigationBarExampleState();
 }
-
+ 
 class _BottomNavigationBarExampleState
     extends State<BottomNavigationBarExample> {
   List<Color> itemColors = [

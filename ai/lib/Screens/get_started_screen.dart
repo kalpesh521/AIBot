@@ -66,8 +66,8 @@ class GetStarted extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                             vertical: 10,
                             horizontal: 35,
-                           ),
-                           primary: Colors.white,
+                          ),
+                          primary: Colors.white,
                         ),
                         onPressed: () {
                           Navigator.push(

@@ -6,8 +6,7 @@ import 'package:ai/Widget/appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:ai/Widget/bottom_motion_tabbar.dart';
-
+ 
 class EditProfilePage extends StatefulWidget {
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
@@ -134,7 +133,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ),
       ),
-      bottomNavigationBar: MotionTabBarWidget(),
+      // bottomNavigationBar:  NotchBarWidget(),
     );
   }
 

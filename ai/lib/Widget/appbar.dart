@@ -24,15 +24,16 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                 height: 35,
                 margin: EdgeInsets.only(left: 15),
                 decoration: BoxDecoration(
-                    border: Border.all(color:  Theme.of(context).colorScheme.primary),
+                    border: Border.all(
+                        color: Theme.of(context).colorScheme.primary),
                     borderRadius: BorderRadius.circular(10.0),
-                    color:   Theme.of(context).colorScheme.primary),
+                    color: Theme.of(context).colorScheme.primary),
                 child: IconButton(
                   icon: Icon(
                     Icons.arrow_back_ios_new_rounded,
                     color: Theme.of(context).colorScheme.secondary,
-                     size: 20,
-                   ),
+                    size: 20,
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -54,7 +55,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           Text(
             title,
             style: TextStyle(
-              color:   Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).colorScheme.onPrimary,
               fontWeight: FontWeight.w600,
             ),
           ),

@@ -1,3 +1,6 @@
+import 'package:ai/Provider/theme_provider.dart';
+import 'package:ai/Screens/InterviewPrep_ai_screen.dart';
+import 'package:ai/Screens/main_home_screen.dart';
 import 'package:ai/Screens/signIn_screen.dart';
 import 'package:ai/Screens/get_started_screen.dart';
 import 'package:ai/Screens/settings_screen.dart';
@@ -12,15 +15,18 @@ import 'package:ai/Screens/home_screen.dart';
 import 'package:ai/Screens/imggen_screen.dart';
 import 'package:ai/Screens/profile_screen.dart';
 import 'package:ai/Screens/voice_chat_screen.dart';
+import 'package:ai/utils/Constants/themes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   await dotenv.load(fileName: "assets/.env");
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
       options: const FirebaseOptions(
     apiKey:
@@ -30,6 +36,7 @@ void main() async {
     messagingSenderId: "42380437700", //paste your messagingSenderId here
     projectId: "aibot-229dd", //paste your project id here
   ));
+
   runApp(MyApp());
 }
 
@@ -47,6 +54,19 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  ThemeProvider themeChangeProvider = ThemeProvider();
+  void getCurrentTheme() async {
+    themeChangeProvider.setDarkTheme =
+        await themeChangeProvider.themePref.getTheme();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getCurrentTheme();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -60,32 +80,31 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) => ProviderState(),
         ),
+        ChangeNotifierProvider(
+          create: (_) =>
+              themeChangeProvider,  
+        ),
       ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: isDarkMode ? darkTheme : lightTheme,
-        darkTheme: darkTheme,
-        themeMode: ThemeMode.light,
-        home: SplashScreen(),
-        // home: HomeScreen(),
-        // home :GetStarted(),
-        // home: LoginPage(),
-        // home: SignUpPage(),
-        // home: SettingScreen(toggleDarkMode: toggleDarkMode(),),
-        // initialRoute: '/home',
-        routes: {
-          '/home': (context) => HomeScreen(),
-          '/profile': (context) => EditProfilePage(),
-          '/settings': (context) =>
-              SettingScreen(toggleDarkMode: toggleDarkMode),
-        },
-        // home: ChatScreen(),
-        // home: VoiceChatScreen(),
-        // home: ImgGenScreen(),
-        // home: ProviderLogin(),
-        // home: ProviderRegistration(),
-        // home: EditProfilePage(),
-      ),
+      child: Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: themeProvider.getTheme(),
+          themeMode: ThemeMode.system,
+          home: SplashScreen(),
+          // home: SettingScreen(),
+        );
+      }),
     );
   }
 }
+       
+
+
+
+ // initialRoute: '/home',
+          // routes: {
+          //   '/home': (context) => MainHomeScreen(),
+          //   '/profile': (context) => EditProfilePage(),
+          //   '/settings': (context) =>
+          //       SettingScreen(toggleDarkMode: toggleDarkMode),
+          // },

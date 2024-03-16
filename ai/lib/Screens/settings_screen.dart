@@ -1,32 +1,24 @@
+import 'package:ai/Provider/theme_provider.dart';
 import 'package:ai/Screens/signIn_screen.dart';
 import 'package:ai/Provider/auth_provider.dart';
 import 'package:ai/Widget/appbar.dart';
+import 'package:ai/utils/Constants/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:ai/Widget/bottom_motion_tabbar.dart';
 
 class SettingScreen extends StatefulWidget {
-  final Function toggleDarkMode;
-
-  SettingScreen({required this.toggleDarkMode});
   @override
   _SettingScreenState createState() => _SettingScreenState();
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  bool isDarkMode = false;
-
-  void btntoggleDarkMode() {
-    setState(() {
-      isDarkMode = !isDarkMode;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     ProviderState _providerState =
         Provider.of<ProviderState>(context, listen: false);
+
+    final themeState = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBarWidget(
         showBackButton: false,
@@ -53,7 +45,7 @@ class _SettingScreenState extends State<SettingScreen> {
               padding: EdgeInsets.symmetric(horizontal: 5),
               child: ListTile(
                 leading: Icon(
-                  isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                  themeState.getDarkTheme ? Icons.dark_mode : Icons.light_mode,
                   color: Theme.of(context).colorScheme.secondary,
                 ),
                 title: Text(
@@ -73,13 +65,15 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
                 trailing: Switch(
-                  value: isDarkMode,
-                  onChanged: (value) {
-                    widget.toggleDarkMode();
-                    btntoggleDarkMode();
+                  value: themeState.getDarkTheme,
+                  onChanged: (bool value) {
+                    setState(() {
+                      themeState.setDarkTheme = value;
+                    });
                   },
                   activeColor: Theme.of(context).colorScheme.secondary,
                 ),
+                 
               ),
             ),
             SizedBox(height: 15),
@@ -192,7 +186,7 @@ class _SettingScreenState extends State<SettingScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: MotionTabBarWidget(),
+      // bottomNavigationBar:  NotchBarWidget() ,
     );
   }
 }
